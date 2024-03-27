@@ -1,0 +1,40 @@
+import example.*
+
+test "no está pago no puede ser llevado por Neo a la matrix" {
+
+	paquete.estaPago(false)
+	paquete.mensajero(neo)
+	paquete.destino(matrix)
+	assert.equals(false, paquete.puedeSerEntregrado())
+
+}
+
+test "está pago puede ser llevado por Chuck a la matrix"{
+	
+	paquete.estaPago(true)
+	paquete.mensajero(chuck)
+	paquete.destino(matrix)
+	assert.equals(true, paquete.puedeSerEntregrado())
+}
+
+test "está pago no puede ser llevado por Lincoln Hawk (80kg) a Brooklyn,camión con un acoplado"{
+	
+	paquete.estaPago(true)
+	paquete.mensajero(hawk)
+	paquete.destino(brooklyn)
+	hawk.peso(80)
+	hawk.vehiculo(camion)
+	camion.acoplados(1)
+	assert.equals(false, paquete.puedeSerEntregrado())
+}
+
+test "está pago puede ser llevado por Lincoln Hawk (80kg) a Brooklyn,bici"{
+	
+	paquete.estaPago(true)
+	paquete.mensajero(hawk)
+	paquete.destino(brooklyn)
+	hawk.peso(80)
+	hawk.vehiculo(bici)
+	assert.equals(true, paquete.puedeSerEntregrado())
+}
+
